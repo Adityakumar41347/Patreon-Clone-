@@ -3,10 +3,13 @@ import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { initFlowbite } from 'flowbite';
+import mongoose from "mongoose";
 
 const Dashboard = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
+ 
+  
 
   useEffect(() => {
     if (status === "loading") return;
@@ -67,7 +70,7 @@ const Dashboard = () => {
           
 
           <div className="pt-4">
-            <button type="submit" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+            <button  type="submit" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
               Submit
             </button>
           </div>

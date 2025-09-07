@@ -1,6 +1,49 @@
 import React from 'react'
 
+import Razorpay from 'razorpay'
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+var options = {
+  key: process.env.KEY_ID, // Make sure this is securely injected from your backend
+  amount: 50000, // Amount in paise (₹500.00)
+  currency: "INR",
+  name: "Aditya",
+  description: "Support Aditya's Project",
+  image: "https://yourdomain.com/logo.png", // Optional logo
+  order_id: "order_ABC123XYZ", // Replace with dynamic order_id from backend
+  handler: function (response) {
+    console.log("Payment successful:", response);
+    // You can redirect or show a success message here
+    window.location.href = "/thank-you";
+  },
+  prefill: {
+    name: "Aditya Kumar",
+    email: "aditya@example.com",
+    contact: "9876543210"
+  },
+  notes: {
+    project: "Patreon-style clone",
+    contributor: "Early Supporter"
+  },
+  theme: {
+    color: "#0d9488" // Tailwind teal-600
+  },
+  modal: {
+    ondismiss: function () {
+      console.warn("Checkout closed by user");
+    }
+  }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+
 const username = ({ params }) => {
+
+
     return (
         <div>
 
@@ -30,19 +73,25 @@ const username = ({ params }) => {
                         <h2 className="supporters font-bold text-xl "> Supporters</h2>
                         <ul className='mx-4'>
                             <li className='my-2 font-medium'>Vishal donated $30 with a massage "lots of love from heart"</li>
-                            
+
                         </ul>
                     </div>
                     <div className="payment w-1/2 bg bg-slate-900 p-5 ">
                         <h2 className="supporters font-bold text-xl mb-3">Make payment</h2>
                         <div className='flex flex-col gap-1 w-full'>
-                            
-                                <input type="text" placeholder='Enter Ammount' className='bg-slate-950   justify-center  p-3 rounded-lg items-center  me-2 mb-2' />
-                                <input type="text" placeholder='Enter Your Name' className='bg-slate-950  justify-center  p-3 rounded-lg items-center  me-2 mb-2' />
-                                <input type="text" placeholder='Enter Massage' className='bg-slate-950  justify-center  p-3 rounded-lg items-center  me-2 mb-2' />
-                           
-                            <button type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Pay</button>
+
+                            <input  type="text" placeholder='Enter Ammount' className='bg-slate-950   justify-center  p-3 rounded-lg items-center  me-2 mb-2' />
+                            <input type="text" placeholder='Enter Your Name' className='bg-slate-950  justify-center  p-3 rounded-lg items-center  me-2 mb-2' />
+                            <input type="text" placeholder='Enter Massage' className='bg-slate-950  justify-center  p-3 rounded-lg items-center  me-2 mb-2' />
+                            <button id='rzp-button1' type="button" className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Pay</button>
+
                         </div>
+
+
+
+
+
+                        
                         <div className='flex justify-start gap-9  '>
                             <button className='bg-slate-600 p-2 rounded-lg'>$20</button>
                             <button className='bg-slate-600 p-2 rounded-lg'>$40</button>

@@ -38,7 +38,7 @@ const PaymentPage = ({ username }) => {
 
         let orderId = a.id;
         var options = {
-            "key": process.env.NEXT_PUBLIC_KEY_ID, // Enter the Key ID generated from the Dashboard
+            "key": currentuser.razorpay_id, // Enter the Key ID generated from the Dashboard
             "amount": amount, // Amount is in currency subunits.
             "currency": "INR",
             "name": "Get me a chai", //your business name
@@ -77,9 +77,9 @@ const PaymentPage = ({ username }) => {
             <div>
 
                 <div className='cover w-full bg-red-50 h-[350] relative'>
-                    <img src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/452146dcfeb04f38853368f554aadde1/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/18.gif?token-hash=2vOo9TQgrnL3x9ZV6_eh3p9Ulm8lMQmfZonf9gApV5Q%3D&token-time=1759536000" alt="" className='h-100 w-full ' />
+                    <img src={currentuser.cover_image}  alt="" className='h-100 w-full ' />
                     <div className="profilepic overflow-hidden absolute  -bottom-13 right-[45vw] border-2 rounded-2xl border-zinc-600">
-                        <img className='w-30  object-cover' src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/aa52624d1cef47ba91c357da4a7859cf/eyJoIjozNjAsInciOjM2MH0%3D/4.gif?token-hash=xeAiyUcjBN2mLnSL_1tZkiahefbn1fgL4o0tqhXF3S8%3D&token-time=1758240000" alt="" />
+                        <img className='w-30  object-cover' src={currentuser.profile_image} alt="" />
                     </div>
                 </div>
                 <div className='info flex justify-center items-center my-15 flex-col gap-2'>
@@ -100,7 +100,8 @@ const PaymentPage = ({ username }) => {
                         <div className="supporters w-1/2 h-90 bg-slate-900 p-5 overflow-y-scroll ">
                             {/* list of suppoters */}
                             <h2 className="supporters font-bold text-xl "> Supporters</h2>
-                            <ul className='mx-4'>
+                            <ul className='mx-4'> 
+                                {payments.length==0 && <li>No payments yet</li>}
                                 {payments.map((element, index) => (
                                     <li key={index} className="my-2 font-medium">
                                         {element.name} donated {element.amount} with a message "{element.message}"

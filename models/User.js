@@ -7,7 +7,8 @@ const UserSchema=new Schema({
       
       profile_image:{type:String},
       cover_image:{type:String},
-      
+      razorpay_id:{type:String},
+      razorpay_secret:{type:String},
       done:{type:Boolean,defult:false}
       
 })

@@ -4,6 +4,7 @@ import Payment from '@/models/Payment';
 import connectDB from '@/db/connectDB';
 import User from '@/models/User';
 import Username from '@/app/[username]/page';
+import { NextResponse } from 'next/server';
 
 
 export const initiate = async (amount, to_username, paymentform) => {
@@ -64,5 +65,28 @@ export const fetchpayment=async (username)=>{
       o_id: p.o_id?.toString(),
       amount:p.amount?.toString()
     }));
+
+}
+export const updateProfile = async (data, oldusername) => {
+    await connectDB()
+    let ndata = Object.fromEntries(data)
+
+    // If the username is being updated, check if username is available
+    if (oldusername !== ndata.username) {
+        let u = await User.findOne({ username: ndata.username })
+        if (u) {
+            return { error: "Username already exists" }
+        }   
+        await User.updateOne({email: ndata.email}, ndata)
+        // Now update all the usernames in the Payments table 
+        await Payment.updateMany({to_user: oldusername}, {to_user: ndata.username})
+        
+    }
+    else{
+
+        
+        await User.updateOne({email: ndata.email}, ndata)
+  }
+
 
 }

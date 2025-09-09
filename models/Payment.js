@@ -10,6 +10,7 @@ const PaymentSchema=new Schema({
       updated_at:{type:Date,defult:Date.now},
       done:{type:Boolean,defult:false}
       
+      
 })
 const Payment=models.Payment || mongoose.model("Payment",PaymentSchema)
 export default Payment;

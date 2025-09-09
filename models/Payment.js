@@ -4,7 +4,7 @@ const PaymentSchema=new Schema({
       name:{type:String,required:true},
       to_user:{type:String,required:true},
       o_id:{type:String,required:true},
-      massage:{type:String,required:true},
+      message:{type:String},
       amount:{type:Number,required:true},
       created_at:{type:Date,defult:Date.now},
       updated_at:{type:Date,defult:Date.now},

@@ -16,7 +16,8 @@ const authOptions = {
   ],
   callbacks: {
   async signIn({ user, account, profile, email, credentials }) {
-     if(account.provider == "github"){
+     if(account.provider == "github"){ 
+      await connectDB()
       const currentuser=await User.findOne({email: user.email})
       if(!currentuser){
         const newuser=new User({

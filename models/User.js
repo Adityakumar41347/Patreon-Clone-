@@ -4,10 +4,10 @@ const UserSchema=new Schema({
       username:{type:String},
       name:{type:String},
       email:{type:String,required:true},
-      created_at:{type:Date,defult:Date.now},
+      
       profile_image:{type:String},
       cover_image:{type:String},
-      updated_at:{type:Date,defult:Date.now},
+      
       done:{type:Boolean,defult:false}
       
 })

@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className='bg-gray-900 text-white h-16 flex items-center justify-between px-4'>
+      <nav className='bg-gray-900 text-white md:h-16 flex flex-col md:flex-row items-center justify-between px-4'>
         <div className="logo font-bold text-lg">GetMeAchai</div>
         <div>
           {session ? (

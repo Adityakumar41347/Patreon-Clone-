@@ -8,10 +8,13 @@ import { NextResponse } from 'next/server';
 
 
 export const initiate = async (amount, to_username, paymentform) => {
-    
-  
+    await connectDB()
+  let a=await User.findOne({username:to_username})
+    const secret=a.razorpay_secret
+    const id=a.razorpay_id
    try{  await connectDB()
-    var instance = new Razorpay({ key_id: process.env.NEXT_PUBLIC_KEY_ID, key_secret: process.env.KEY_SECRET})
+    
+    var instance = new Razorpay({ key_id:id, key_secret: secret})
     var options = {
       
 
@@ -57,7 +60,7 @@ export const fetchuser=async (username)=>{
 }
 export const fetchpayment=async (username)=>{
   await connectDB()
-  let Payments=await Payment.find({to_user:username }).sort({amount:-1}).lean()
+  let Payments=await Payment.find({to_user:username }).sort({amount:-1}).limit(10).lean()
   return Payments.map((p) => ({
       ...p,
       _id: p._id.toString(),

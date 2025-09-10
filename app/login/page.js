@@ -9,6 +9,7 @@ const login = () => {
     const { data: session } = useSession()
     const router=useRouter()
     useEffect(() => {
+        document.title="Login-to Get Started"
         if (session) {
             router.push("/dashboard");
         }
@@ -20,7 +21,7 @@ const login = () => {
 
     return (
         <div className='text-white py-14 container mx-auto'>
-            <h1 className='font-bold text-3xl text-center'>Login to Get your fans to support you</h1>
+            <h1 className='font-bold text-3xl text-center'>Login to Get Started</h1>
             <div className="flex flex-col items-center gap-2 min-h-screen  p-10">
 
 
@@ -58,3 +59,5 @@ const login = () => {
 }
 
 export default login
+
+ 
